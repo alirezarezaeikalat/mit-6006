@@ -106,12 +106,12 @@
 
 ////////////////////////////// Data structures and Dynamic programming /////////////////
 
-6. Difference between Interfaces (API/ADT) vs Data structures:
+10. Difference between Interfaces (API/ADT) vs Data structures:
 
     - Interface says what you want to do (Specification - What data you want to store - What operations are supported)
     - Data structures says how to do it (Representation -       How to store it       - Algorithms to support operations)
 
-7. Sequence interfaces:  
+11. Sequence interfaces:  
 
         a. --Static Sequence interface--: The number of items doesn't change.
 
@@ -133,7 +133,7 @@
                     - Theta(1): for get_at, set_at, and len
                     - Theta(n): for build, and iter_seq
                 
-                --How to build an array at the beginning--: 
+                --How to build an array at first place--: 
                     --Memory allocation model--: 
                         allocate array of size of n in Theta(n)
 
@@ -162,7 +162,7 @@
                         next;
                     }
 
-                    We have --head--, --len--, We can add --tail-- (We call this data structure augmentation)
+                    We have --head--, --len--, We can add --tail-- (We call this --data structure augmentation-- (add more info about DS))
             
             2. --Dynamic arrays-- (What python called list, inside python interpreter):
 
