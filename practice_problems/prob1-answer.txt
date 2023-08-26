@@ -1,0 +1,26 @@
+1. (logn)^a = O(n^b) for any constants a and b
+
+
+Problem 1.1:
+
+    a. f1 = (logn)^2019 < f5 = nlogn < f2 = n^2 * log(n^2019) < f3 = n^3 < f4 = 2.019 ^ n 
+
+    b.  
+        (n) = n! / (k! * (n-k)!)
+         K
+
+         [ATTENTION]
+         n! ~ sqrt(2*pi*n) (n/e)^n (Stirling's approximation)
+         
+         [ATTENTION]
+         log(n!) ~ Theta(nlogn)
+         
+         f1 = [2 ^ n]
+         f2 = [n ^ 3]
+         f3 = (n)   =  n! / ((n/2)!) ^ 2  => using Stirling's approximation  = [Theta(2^n / sqrt(n))]
+               n/2
+         f4 = n! = [Theta(sqrt(n)*(n/e) ^ n)]
+         f5 = (n) = [Theta(n^3)]
+               3
+            
+        answer: {f2, f5} < f3 < f1 < f4

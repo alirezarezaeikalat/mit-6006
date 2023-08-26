@@ -167,14 +167,35 @@
             2. --Dynamic arrays-- (What python called list, inside python interpreter):
 
                 - Relax constraint size(array) = n
+                - How much make the array bigger? make it bigger --roughly-- from algorithm perspective, --roughly-- means throw constant on it.
                 - Enforce size = theta(n)   & >= n
-                - Maintain A[i] = xi
+                - Maintain A[i] = xi            (There are some blanks at the end)
+                - insert_at_last -> A[len] = x, len +=1
+
 
                         A (pointer)
                         len 
                         size (Actual size of array)
+                
+                - If len = size we don't have space: 
 
-                    insert_at_last: 
+                        [ATTENTION]
+                        With static arrays we make our array bigger --every time-- we want to add an item. We dynamic arrays we do make the array bigger 
+                                --sometimes--.
+                        
+                        allocate new array of 2 * size
 
-                            case 1: size > n        constant time   len +=1
-                            case 2: size = n        allocate new array of size = constant * size 
+                        - n insert_at_last from empty array:
+
+                                resize at n = 1, 2, 4, 16, ...
+
+                                => resize cost is linear each time = Theta(1 + 2 + 4 + 8 + 16) = Theta(Sigma_i=0_i=logn(2^i)) = Theta(2^logn - 1)
+
+                                == Theta(n)     Linear time for --all of the operations--, It kind of --like constant each--         
+                
+                -- Amortization--:      Operation takes T(n) amortized time if any k operations takes <= k.T(n) time
+
+                        So in the above example T(1)    (Constant amortized)
+
+                                amortized is a particular kind of averaging, averaging --over the sequence of operations--
+
