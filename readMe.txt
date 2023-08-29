@@ -92,6 +92,7 @@
                 2n + 3 >= 1 * n    for every n >= 1             
                    |      |   |                   |
                    f(n)   c   g(n)                n0
+                
 9. Big Theta notation (Average bound)
         
         --Definition--: The function f(n) = Theta(g(n)) if and only if exists constants c1, c2 and n0
@@ -104,14 +105,16 @@
               |           |      |   |                   |
               c0          f(n)   c1  g(n)                n0
 
+
 ////////////////////////////// Data structures and Dynamic programming /////////////////
 
-10. Difference between Interfaces (API/ADT) vs Data structures:
+
+10. Difference between --Interfaces (API/ADT) vs Data structures--:
 
     - Interface says what you want to do (Specification - What data you want to store - What operations are supported)
     - Data structures says how to do it (Representation -       How to store it       - Algorithms to support operations)
 
-11. Sequence interfaces:  
+11. --Sequence interfaces--:  
 
         a. --Static Sequence interface--: The number of items doesn't change.
 
@@ -199,3 +202,111 @@
 
                                 amortized is a particular kind of averaging, averaging --over the sequence of operations--
 
+
+12. --Set interface--: 
+
+        Set is just a container         
+
+        -- operations: 
+
+                --container--: 
+                        a. build(A): given an iterable A, build sequence from items in A 
+                        b. len(): return the number of stored items
+                -- static--:
+                        c. find(k): returned the stored item with key k 
+                --dynamic--: 
+                        d. insert(x): add x to set (replace item with key x.key if exists)
+                        e. delete(k): remove and return the stored item with key k
+                --Order--:
+                        f. iter_ord(): return the store items one by one in key order 
+                        g. find_min(): return the stored item with smallest key 
+                        h. find_max(): return the stored item with largest key 
+                        i. find_next(k): return the stored item with smallest key larger than k 
+                        j. find_prev(k): return the stored item with largest key smaller than k
+                
+        Data structure                          Operations(Theta)
+                                Container          Static          Dynamic                   Order 
+                                                                                find_min()           find_prev(k)
+                                                                                find_max()           find_next(k)
+        Unordered array             n               n                 n             n                      n
+
+        Ordered array              nlogn            logn              n             1                      logn 
+
+
+
+13. --Sorting vocabulary--: 
+
+        --Destructive--: Overwrite the input array 
+
+        --In place--: Uses Theta(1) extra space
+
+14. --Sorting algorithms--: 
+
+        a. --Permutation sort--: It is the Omega(n!*n) 
+
+                def permutation_sort(A):
+                        ''' Sort A '''
+                        for B in permutations(A):
+                                if is_sorted(B):
+                                        return B 
+        
+
+                1. Enumerate perms -> Omega(n)
+                2. Check if perm is sorted -> Theta(n)
+
+                        for i in range(n-1):
+                                return B[i] <= B[i+1]
+                
+        
+        b. --Selection sort--: 
+
+                Selection sort in nutshell: find the biggest element, swap it to the end. find the next big element swap it to the end minus 1. 
+
+                [ATTENTION]
+                It is possible to use two for loops for selection sort, but we are using --recursive-- to show efficiency and correctness.
+
+                --Helper function for selection sort--
+
+                def prefix_max(A, i):
+                        '''Return the max element index in A[:i+1]'''
+                        if i > 0: 
+                                j = prefix_max(A, i - 1)
+                                if A[i] < A[j]:
+                                        return j 
+                        return i
+                
+                - Proof of correctness by induction:
+
+                        Base case -> is true 
+
+                        inductive step: 
+
+                        Assume our algorithm gives the prefix of max element in [:i]
+
+                                We have two case for big element: 
+                                        a. it is at element i 
+                                        b. it has index < i
+
+                - Checking the runtime:
+
+                        (Runtime function) S(1) = Theta(1)
+                                                .
+                                                .
+                                                .
+                                           S(n) = S(n-1) + Theta(1)
+
+                def selection_sort(A, i = None):
+                        '''Sort A[:i+1]'''
+                        if i is None: i = len(A) - 1
+                        if i > 0: 
+                                j = prefix_max(A, i)
+                                A[i], A[j] = A[j], A[i]
+                                selection_sort(A, i - 1)
+        
+        c. --Insertion sort--           (Find out about it)
+
+        
+
+        d. --Merge sort--: 
+
+                
