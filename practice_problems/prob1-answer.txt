@@ -1,4 +1,4 @@
-1. (logn)^a = O(n^b) for any constants a and b
+1. (logn)^a = o(n^b) for any constants a and b        small o is strictly smaller
 
 
 Problem 1.1:

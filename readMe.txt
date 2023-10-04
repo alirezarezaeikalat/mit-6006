@@ -17,7 +17,9 @@
 
 3. Algorithm: 
 
-        an algorithm map I -> O to one output
+        an algorithm map I -> O to one output    A problem input is sometimes called an --instance-- of the problem
+
+        A (deterministic) algorithm is a procedure that maps inputs to single outputs.
 
 4. Birthday problem: 
 
@@ -44,7 +46,9 @@
         -- Proof of efficiency: 
 
 
-5. Model of computation: What computers can do in a fixed amount of time
+5. --Model of computation--: A model of computation, in simple terms, is a conceptual framework or a set of rules and principles used to describe how a
+        computer or a computational system works. It's like a --simplified representation-- that helps us understand and analyze how computations
+        are performed, without getting into the nitty-gritty details of actual hardware or software
 
         Word-RAM model: randomly access memory in constant time
 
@@ -118,13 +122,13 @@
 
         a. --Static Sequence interface--: The number of items doesn't change.
 
-            - items: x0, x1, ..., xn
+            - items: x0, x1, ..., xn-1
 
             // operations
             
                 - build(X): make new DS for items in X 
                 - len(): return n 
-                - iter_seq(): Output x0, x1, ..., xn in sequence order. 
+                - iter_seq(): Output x0, x1, ..., xn-1 in sequence order. 
                 - get_at(i): return xi (index i)
                 - set_at(i,x): set xi to X
 
@@ -145,18 +149,19 @@
 
         b. Dynamic sequence interface: The numbers of items change.
 
-                 - items: x0, x1, ..., xn
+                 - items: x0, x1, ..., xn-1
 
             // operations
             
                 - build(X): make new DS for items in X 
                 - len(): return n 
-                - iter_seq(): Output x0, x1, ..., xn in sequence order. 
+                - iter_seq(): Output x0, x1, ..., xn-1 in sequence order. 
                 - get_at(i): return xi (index i)
                 - set_at(i,x): set xi to X
                 - insert_at(i, x): make x new xi, shifting xi -> xi+1 -> xi+2 -> ... -> xn-1 -> xn 
                 - delete_at(i): shift  xi <- xi+1 <- ... <- xn-2 <- xn-1
-                - insert ant delete at first or last
+                - insert and delete at first or last
+                - get_at and set_at at first or last 
 
             1. --Linked list-- (Solution to above interface):
 
@@ -166,6 +171,8 @@
                     }
 
                     We have --head--, --len--, We can add --tail-- (We call this --data structure augmentation-- (add more info about DS))
+        
+        
             
             2. --Dynamic arrays-- (What python called list, inside python interpreter):
 
@@ -201,7 +208,14 @@
                         So in the above example T(1)    (Constant amortized)
 
                                 amortized is a particular kind of averaging, averaging --over the sequence of operations--
+                
 
+                -- Dynamic Sequence Operations Comparison---:
+
+                        Static Array                                     Linked list 
+
+        insert and delete_at      Theta(n)                      insert_first and delete_first -> Theta(1)
+                                                                get_at and set_at       -> Theta(n)
 
 12. --Set interface--: 
 
@@ -226,19 +240,20 @@
                 
         Data structure                          Operations(Theta)
                                 Container          Static          Dynamic                   Order 
-                                                                                find_min()           find_prev(k)
-                                                                                find_max()           find_next(k)
+                                build(A)           find(k)         insert(x)     find_min()           find_prev(k)
+                                                                   delete(k)     find_max()           find_next(k)
         Unordered array             n               n                 n             n                      n
 
         Ordered array              nlogn            logn              n             1                      logn 
 
+        direct access array         n                1                1             Unknown                 Unknown
 
 
 13. --Sorting vocabulary--: 
 
         --Destructive--: Overwrite the input array 
 
-        --In place--: Uses Theta(1) extra space
+        --In place--: Uses Theta(1) extra space         (This is common in solving problems)
 
 14. --Sorting algorithms--: 
 
@@ -264,6 +279,12 @@
 
                 [ATTENTION]
                 It is possible to use two for loops for selection sort, but we are using --recursive-- to show efficiency and correctness.
+
+                Steps for selection sort in a recursive way:
+                        1. Find the biggest element in index <= i
+                        2. Swap to the end of the list 
+                        3. Sort 1, 2, ..., i - 1        (Repeat the two above steps)   
+                        
 
                 --Helper function for selection sort--
 
@@ -309,4 +330,46 @@
 
         d. --Merge sort--: 
 
+                def merge_sort(A, a = 0, b = None):
+                        """Sort A[a:b]"""
+                        if b is None: b = len(A)
+                        if 1 < b - a: 
+                        
+15. For anyway to store items and for any algorithm we can't find an algorithm --faster than logn for find(k)--:
+
+        --Comparison Model--: Comparison Model is a theoretical framework for analyzing and classifying algorithms based on the number of comparisons they
+                make between elements in the input data.
+
+                [ATTENTION]
+                It's important to note that not all algorithms fit within the comparison model. There are non-comparison-based algorithms, 
+                such as --counting sort-- and --radix sort-- for sorting, that do not rely solely on element comparisons and can achieve better 
+                performance for specific types of data.
+
+                You think of items as --black box--, we only can do comparison on the two items.
+
+                        = , > , <       These are the operations
+        
+        [ATTENTION]
+        All the sorting algorithms mentioned above are --Comparison Sorting Algorithm--.
+
+        We can view and model algorithms in Comparison model as a --Decision Tree--.
+
+        --Decision Trees--: 
+                Decision trees are often used to model the behavior of comparison-based algorithms. 
+                --Each node in the tree represents a comparison between two elements--,
+                 and --the branches represent the possible outcomes of the comparison--.
+                Analyzing the height of the decision tree provides insights into the lower bounds for the problem.
+        
+
+                [The height of Decision tree is logn in comparison model]
+
+                To get time complexity lower than logn we can use --direct access array--
+                in the direct access, we store item with key k at k index.
+
+                [ATTENTION]
+                Direct access arrays cause space limitation             u (maximum key) <= w (word size)
+
                 
+
+
+
